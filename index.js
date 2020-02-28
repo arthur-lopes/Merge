@@ -1,12 +1,18 @@
+const readline = require('readline-sync')
+
 function start() {
     const content = {}
 
-    content.searchTerm = askAndReturnSearchTerm()
+    content.searchCity = askAndReturnSearchCity()
+    content.searchBusiness = askAndReturnSearchBusiness()
 
 
     // Pergunta pelo termo de busca e retorna a busca
-    function askAndReturnSearchTerm() {
-        return 'TERM EXAMPLE'
+    function askAndReturnSearchCity() {
+        return readline.question('Digite uma cidade: ')
+    }
+    function askAndReturnSearchBusiness() {
+        return readline.question('Digite um tipo de negócio: ')
     }
     console.log(content)
 }
