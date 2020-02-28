@@ -10,7 +10,7 @@ async function robot(content) {
 
     const placesArray = await fetchGoogleAndReturnPlacesInfo(query)
     console.dir(placesArray, {depth: null})
-    process.exit(0) 
+    process.exit(0)
 
 async function fetchGoogleAndReturnPlacesInfo(query) {
     const response = await customSearch.cse.list({
@@ -21,20 +21,9 @@ async function fetchGoogleAndReturnPlacesInfo(query) {
         start: 1
     })
 
-    totalResults = response.data.searchInformation.totalResults
-    const calcResults = Math.floor(totalResults/10)
-    let placesAllInfo = []
+    const totalResults = response.data.searchInformation.totalResults
 
-    for (i=1; i < calcResults; i=i+10) {
-    try {
-        const response = await customSearch.cse.list({
-            auth: googleSearchCredentials.apiKey,
-            cx: googleSearchCredentials.searchEngineId,
-            q: query,
-            num: 10,
-            start: i
-    })
-    placesInfo = response.data.items.map((item) => {
+    const placesInfo = response.data.items.map((item) => {
         return [ 
             item.title,
             item.link,
@@ -43,13 +32,8 @@ async function fetchGoogleAndReturnPlacesInfo(query) {
             item.pagemap.aggregaterating
          ]
     })
-    placesAllInfo.push(...placesInfo)
-    // console.log(placesAllInfo)
-    } catch (error) {
-            break
-    }
-}
-return placesAllInfo
+    
+    return placesInfo
 }
 }
 
