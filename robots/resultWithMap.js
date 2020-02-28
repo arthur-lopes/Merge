@@ -15,17 +15,11 @@ async function fetchGoogleAndReturnPlacesInfo(query) {
         cx: googleSearchCredentials.searchEngineId,
         q: query,
         num: 10,
-        start: 11
+        start: 1
     })
 
     const placesInfo = response.data.items.map((item) => {
-        return [ 
-            item.title,
-            item.link,
-            item.snippet,
-            item.pagemap.metatags,
-            item.pagemap.aggregaterating
-         ]
+        return [ item.title, item.link, item.snippet ]
     })
     
     return placesInfo
